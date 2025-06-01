@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanzador de Aplicaciones</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-rocket"></i> Mi Lanzador de Aplicaciones</h1>
+            <button id="addAppBtn" class="btn-primary">
+                <i class="fas fa-plus"></i> Agregar Aplicación
+            </button>
+        </header>
+
+        <div class="categories-nav">
+            <button class="category-btn active" data-category="all">
+                <i class="fas fa-th"></i> Todas
+            </button>
+            <button class="category-btn" data-category="trabajo">
+                <i class="fas fa-briefcase"></i> Trabajo
+            </button>
+            <button class="category-btn" data-category="entretenimiento">
+                <i class="fas fa-gamepad"></i> Entretenimiento
+            </button>
+            <button class="category-btn" data-category="utilidades">
+                <i class="fas fa-tools"></i> Utilidades
+            </button>
+            <button class="category-btn" data-category="desarrollo">
+                <i class="fas fa-code"></i> Desarrollo
+            </button>
+            <button class="category-btn" data-category="multimedia">
+                <i class="fas fa-photo-video"></i> Multimedia
+            </button>
+            <button class="category-btn" data-category="otros">
+                <i class="fas fa-folder"></i> Otros
+            </button>
+        </div>
+
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Buscar aplicaciones...">
+        </div>
+
+        <div class="apps-grid" id="appsGrid">
+            <!-- Las aplicaciones se mostrarán aquí -->
+        </div>
+    </div>
+
+    <!-- Modal para agregar aplicación -->
+    <div id="addAppModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus-circle"></i> Agregar Nueva Aplicación</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="addAppForm">
+                <div class="form-group">
+                    <label for="appName">Nombre de la aplicación:</label>
+                    <input type="text" id="appName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="appPath">Ruta del ejecutable:</label>
+                    <div class="file-input-group">
+                        <input type="text" id="appPath" required placeholder="Ejemplo: C:\Program Files\App\app.exe">
+                        <button type="button" id="browseBtn" class="btn-secondary">
+                            <i class="fas fa-folder-open"></i> Examinar
+                        </button>
+                    </div>
+                    <small>Ruta completa al archivo .exe de la aplicación</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="appCategory">Categoría:</label>
+                    <select id="appCategory" required>
+                        <option value="trabajo">Trabajo</option>
+                        <option value="entretenimiento">Entretenimiento</option>
+                        <option value="utilidades">Utilidades</option>
+                        <option value="desarrollo">Desarrollo</option>
+                        <option value="multimedia">Multimedia</option>
+                        <option value="otros">Otros</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="appIcon">Icono:</label>
+                    <div class="icon-selection">
+                        <div class="icon-options" id="iconOptions">
+                            <button type="button" class="icon-btn active" data-icon="fas fa-desktop">
+                                <i class="fas fa-desktop"></i>
+                            </button>
+                            <button type="button" class="icon-btn" data-icon="fas fa-gamepad">
+                                <i class="fas fa-gamepad"></i>
+                            </button>
+                            <button type="button" class="icon-btn" data-icon="fas fa-code">
+                                <i class="fas fa-code"></i>
+                            </button>
+                            <button type="button" class="icon-btn" data-icon="fas fa-paint-brush">
+                                <i class="fas fa-paint-brush"></i>
+                            </button>
+                            <button type="button" class="icon-btn" data-icon="fas fa-music">
+                                <i class="fas fa-music"></i>
+                            </button>
+                            <button type="button" class="icon-btn" data-icon="fas fa-video">
+                                <i class="fas fa-video"></i>
+                            </button>
+                            <button type="button" class="icon-btn" data-icon="fas fa-calculator">
+                                <i class="fas fa-calculator"></i>
+                            </button>
+                            <button type="button" class="icon-btn" data-icon="fas fa-globe">
+                                <i class="fas fa-globe"></i>
+                            </button>
+                            <button type="button" class="icon-btn" data-icon="fas fa-file-text">
+                                <i class="fas fa-file-text"></i>
+                            </button>
+                            <button type="button" class="icon-btn" data-icon="fas fa-camera">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                            <button type="button" class="icon-btn" data-icon="fas fa-cog">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                            <button type="button" class="icon-btn" data-icon="fas fa-terminal">
+                                <i class="fas fa-terminal"></i>
+                            </button>
+                        </div>
+                        <input type="hidden" id="selectedIcon" value="fas fa-desktop">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Guardar Aplicación
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación para eliminar -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content small">
+            <div class="modal-header">
+                <h2><i class="fas fa-trash"></i> Eliminar Aplicación</h2>
+                <span class="close">&times;</span>
+            </div>
+            <p>¿Estás seguro de que quieres eliminar esta aplicación del lanzador?</p>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" id="cancelDeleteBtn">Cancelar</button>
+                <button type="button" class="btn-danger" id="confirmDeleteBtn">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar aplicación -->
+    <div id="editAppModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit"></i> Editar Aplicación</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="editAppForm">
+                <input type="hidden" id="editAppId">
+                <div class="form-group">
+                    <label for="editAppName">Nombre de la aplicación:</label>
+                    <input type="text" id="editAppName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editAppPath">Ruta del ejecutable:</label>
+                    <div class="file-input-group">
+                        <input type="text" id="editAppPath" required>
+                        <button type="button" id="editBrowseBtn" class="btn-secondary">
+                            <i class="fas fa-folder-open"></i> Examinar
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editAppCategory">Categoría:</label>
+                    <select id="editAppCategory" required>
+                        <option value="trabajo">Trabajo</option>
+                        <option value="entretenimiento">Entretenimiento</option>
+                        <option value="utilidades">Utilidades</option>
+                        <option value="desarrollo">Desarrollo</option>
+                        <option value="multimedia">Multimedia</option>
+                        <option value="otros">Otros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editAppIcon">Icono:</label>
+                    <div class="icon-selection">
+                        <div class="icon-options" id="editIconOptions">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                        <input type="hidden" id="editSelectedIcon">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelEditBtn">Cancelar</button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Botones de exportar/importar -->
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 999; display: flex; gap: 10px;">
+        <button id="exportBtn" class="btn-secondary"><i class="fas fa-download"></i> Exportar</button>
+        <button id="importBtn" class="btn-secondary"><i class="fas fa-upload"></i> Importar</button>
+        <input type="file" id="importFileInput" accept="application/json" style="display:none;">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
