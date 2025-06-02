@@ -481,9 +481,35 @@ class AppLauncher {
     }
 }
 
-// Inicializar la aplicación cuando el DOM esté listo
+// === Modo Noche/Día ===
+function setTheme(theme) {
+    document.body.classList.remove('theme-day', 'theme-night');
+    if (theme === 'night') {
+        document.body.classList.add('theme-night');
+        document.getElementById('themeToggleBtn').innerHTML = '<i class="fas fa-sun"></i> Modo Día';
+    } else {
+        document.body.classList.add('theme-day');
+        document.getElementById('themeToggleBtn').innerHTML = '<i class="fas fa-moon"></i> Modo Noche';
+    }
+    localStorage.setItem('theme', theme);
+}
+
+function detectThemeByHour() {
+    const hour = new Date().getHours();
+    return (hour >= 7 && hour < 19) ? 'day' : 'night';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar la aplicación cuando el DOM esté listo
     window.appLauncher = new AppLauncher();
+
+    // Tema automático o preferencia guardada
+    const savedTheme = localStorage.getItem('theme');
+    setTheme(savedTheme || detectThemeByHour());
+    document.getElementById('themeToggleBtn').addEventListener('click', () => {
+        const current = document.body.classList.contains('theme-night') ? 'night' : 'day';
+        setTheme(current === 'night' ? 'day' : 'night');
+    });
 });
 
 document.addEventListener('keydown', (e) => {
