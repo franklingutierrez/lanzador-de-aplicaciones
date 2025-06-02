@@ -19,6 +19,7 @@ class AppLauncher {
         this.selectedIcon = 'fas fa-desktop';
         this.appToDelete = null;
         this.draggedAppId = null;
+        this.editMode = false;
         this.initializeEventListeners();
         this.renderApps();
         if (this.apps.length === 0) {
@@ -61,6 +62,11 @@ class AppLauncher {
             if (e.target.classList.contains('modal')) {
                 this.hideModal(e.target.id);
             }
+        });
+        document.getElementById('editModeBtn').addEventListener('click', () => {
+            this.editMode = !this.editMode;
+            this.renderApps();
+            document.getElementById('editModeBtn').classList.toggle('active', this.editMode);
         });
     }
 
@@ -260,7 +266,7 @@ class AppLauncher {
             card.setAttribute('draggable', 'true');
             card.setAttribute('data-id', app.id);
             card.innerHTML = `
-                <div class="app-actions">
+                <div class="app-actions${this.editMode ? ' show' : ''}">
                     <button class="action-btn edit-btn" title="Editar"><i class="fas fa-edit"></i></button>
                     <button class="action-btn delete-btn" title="Eliminar"><i class="fas fa-trash"></i></button>
                 </div>
@@ -274,7 +280,7 @@ class AppLauncher {
             `;
             // Ejecutar app al hacer click en la tarjeta (no en los botones de acción)
             card.addEventListener('click', (e) => {
-                if (!e.target.closest('.action-btn')) {
+                if (!e.target.closest('.action-btn') && !this.editMode) {
                     this.launchApp(app.path, app.id);
                 }
             });
