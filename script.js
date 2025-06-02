@@ -9,7 +9,7 @@ const CATEGORIES = [
 ];
 const ICONS = [
     'fas fa-desktop','fas fa-gamepad','fas fa-code','fas fa-paint-brush','fas fa-music','fas fa-video','fas fa-calculator','fas fa-globe','fas fa-file-text','fas fa-camera','fas fa-cog','fas fa-terminal',
-    'fas fa-book','fas fa-bookmark','fas fa-bug','fas fa-bolt','fas fa-bell','fas fa-cloud','fas fa-database','fas fa-envelope','fas fa-heart','fas fa-lightbulb','fas fa-map','fas fa-mobile','fas fa-print','fas fa-search','fas fa-shield-alt','fas fa-star','fas fa-sync','fas fa-tasks','fas fa-user','fas fa-users','fas fa-wifi','fas fa-wrench','fas fa-rocket','fas fa-shopping-cart','fas fa-chart-bar','fas fa-clipboard','fas fa-comment','fas fa-folder-open','fas fa-key','fas fa-lock','fas fa-microphone','fas fa-paperclip','fas fa-plug','fas fa-power-off','fas fa-question','fas fa-rss','fas fa-save','fas fa-server','fas fa-share','fas fa-sitemap','fas fa-sliders-h','fas fa-thumbs-up','fas fa-trash-alt','fas fa-unlock','fas fa-upload','fas fa-volume-up','fas fa-wallet','fas fa-window-maximize'
+    'fas fa-book','fas fa-bug','fas fa-bolt','fas fa-cloud','fas fa-heart','fas fa-lightbulb','fas fa-map','fas fa-mobile','fas fa-print','fas fa-search','fas fa-shield-alt','fas fa-star','fas fa-sync','fas fa-tasks','fas fa-user','fas fa-users','fas fa-wifi','fas fa-wrench','fas fa-rocket','fas fa-shopping-cart','fas fa-chart-bar','fas fa-clipboard','fas fa-comment','fas fa-folder-open','fas fa-key','fas fa-lock','fas fa-microphone','fas fa-paperclip','fas fa-plug','fas fa-power-off','fas fa-question','fas fa-rss','fas fa-save','fas fa-server','fas fa-share','fas fa-sitemap','fas fa-sliders-h','fas fa-thumbs-up','fas fa-trash-alt','fas fa-unlock','fas fa-upload','fas fa-volume-up','fas fa-wallet','fas fa-window-maximize'
 ];
 
 class AppLauncher {
@@ -152,12 +152,9 @@ class AppLauncher {
     }
 
     fillEditIcons(selectedIcon) {
-        const icons = [
-            'fas fa-desktop','fas fa-gamepad','fas fa-code','fas fa-paint-brush','fas fa-music','fas fa-video','fas fa-calculator','fas fa-globe','fas fa-file-text','fas fa-camera','fas fa-cog','fas fa-terminal'
-        ];
         const container = document.getElementById('editIconOptions');
         container.innerHTML = '';
-        icons.forEach(icon => {
+        ICONS.forEach(icon => {
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.className = 'icon-btn' + (icon === selectedIcon ? ' active' : '');
