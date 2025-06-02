@@ -4,13 +4,26 @@
   "description": "Una aplicación web moderna y funcional para organizar y ejecutar aplicaciones de tu PC desde un interfaz intuitivo y elegante.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "electron": "^36.3.2"
+    "electron": "^36.3.2",
+    "electron-builder": "^24.6.0"
+  },
+  "build": {
+    "appId": "com.guiratec.lanzador",
+    "productName": "Lanzador de Aplicaciones",
+    "files": [
+      "**/*"
+    ],
+    "win": {
+      "icon": "mochila.ico",
+      "target": "nsis"
+    }
   }
 }

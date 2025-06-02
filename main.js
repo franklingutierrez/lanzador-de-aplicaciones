@@ -5,7 +5,7 @@ function createWindow () {
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
-     icon: path.join(__dirname, 'mochila.png'), // <-- aquí tu icono
+     icon: path.join(__dirname, 'mochila.ico'), // <-- aquí tu icono .ico para Windows
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
