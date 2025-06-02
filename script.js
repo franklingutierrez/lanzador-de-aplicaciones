@@ -486,10 +486,10 @@ function setTheme(theme) {
     document.body.classList.remove('theme-day', 'theme-night');
     if (theme === 'night') {
         document.body.classList.add('theme-night');
-        document.getElementById('themeToggleBtn').innerHTML = '<i class="fas fa-sun"></i> Modo Día';
+        document.getElementById('themeToggleBtn').innerHTML = '<i class="fas fa-sun"></i>';
     } else {
         document.body.classList.add('theme-day');
-        document.getElementById('themeToggleBtn').innerHTML = '<i class="fas fa-moon"></i> Modo Noche';
+        document.getElementById('themeToggleBtn').innerHTML = '<i class="fas fa-moon"></i>';
     }
     localStorage.setItem('theme', theme);
 }

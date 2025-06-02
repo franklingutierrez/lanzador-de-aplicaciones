@@ -584,6 +584,41 @@ search-bar input {
     color: var(--icon-hover, #764ba2);
 }
 
+/* Botón de cambio de tema */
+.theme-toggle-btn {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1200;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    background: var(--bg-card, #fff);
+    color: var(--icon-main, #667eea);
+    transition: background 0.2s, color 0.2s;
+}
+
+.theme-toggle-btn:hover {
+    background: var(--btn-primary-bg, #667eea);
+    color: var(--btn-primary-color, #fff);
+}
+
+@media (max-width: 600px) {
+    .theme-toggle-btn {
+        top: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .container {
