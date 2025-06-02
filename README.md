@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/86995428-a1eb-4fa6-a2ff-39fe5945cc63)
+
 # 🚀 Lanzador de Aplicaciones
 
 Una aplicación de escritorio moderna para Windows que te permite organizar, buscar y ejecutar tus aplicaciones favoritas desde una interfaz intuitiva y elegante.
